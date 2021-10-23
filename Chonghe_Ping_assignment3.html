@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment1</title>
+    <style>
+        table {
+            width: 600px;
+            margin: 100px auto;
+            text-align: center;
+            border-collapse: collapse;
+            text-align: center;
+            padding: 2px;
+        }
+        
+        th,
+        td {
+            border: 1px solid #333;
+        }
+        
+        thead tr {
+            height: 40px;
+            background-color: #ccc;
+        }
+        
+        #input-search {
+            width: 600px;
+            height: 50px;
+            border: 1px solid black;
+            padding: 10px;
+            border-radius: 2em;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <h1>Assignment1</h1>
+        <thead>
+            <tr>
+                <th>Student Name</th>
+                <th>Age</th>
+                <th>Phone#</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <hr />
+    <input type="search" id="input-search" onkeydown="inputEnter()" placeholder="Search......" />
+    <hr />
+    <ol></ol>
+    <hr />
+    <ul></ul>
+    <hr />
+    <select></select>
+
+    <script>
+        /* table */
+        //data
+        const tableInfo = [{
+            studentName: "John",
+            Age: 19,
+            Phone: "455 - 983 - 0903",
+            Address: "123 Ave, San Francisco, CA, 94011",
+        }, {
+            studentName: "Alex",
+            Age: 21,
+            Phone: "455 - 983 - 0912",
+            Address: "456 Rd, San Francisco, CA, 94012",
+        }, {
+            studentName: "Josh",
+            Age: 22,
+            Phone: "455 - 345 - 0912",
+            Address: "789 Dr, Newark, CA, 94016",
+        }, {
+            studentName: "Matt",
+
+            Age: 23,
+            Phone: "321 - 345 - 0912",
+            Address: "223 Dr, Sunnyvale, CA, 94016",
+        }, ];
+
+        // function
+        let tbody = document.querySelector("tbody");
+        for (let i = 0; i < tableInfo.length; i++) {
+            //const element = tableInfo[i];
+            let tr = document.createElement("tr");
+            tbody.appendChild(tr);
+
+            for (const k in tableInfo[i]) {
+                let td = document.createElement("td");
+                //console.log(tableInfo[i][k]);
+                td.innerHTML = tableInfo[i][k];
+                tr.appendChild(td);
+            }
+        }
+
+        /* search */
+        function inputEnter() {
+            if (event.keyCode == 13) {
+                alert(document.getElementById("input-search").value);
+            }
+        }
+
+        /* list */
+        // data
+        const list = ["HTML", "JavaScript", "CSS", "React", "Redux", "Java"];
+        //function
+        let ul = document.querySelector("ul");
+        let ol = document.querySelector("ol");
+        list.forEach((element) => {
+            let li = document.createElement("li");
+            ol.appendChild(li);
+            li.innerHTML = element;
+        });
+        list.map((value) => {
+            let li = document.createElement("li");
+            ul.appendChild(li);
+            li.innerHTML = value;
+        });
+
+        /* select */
+        // data
+        const dropDownList = [{
+            value: "newark",
+            content: "Newark",
+        }, {
+            value: "santaClara",
+            content: "Santa Clara",
+        }, {
+            value: "unionCity",
+            content: "Union City",
+        }, {
+            value: "albany",
+            content: "Albany",
+        }, {
+            value: "dalyCity",
+            content: "Daly City",
+        }, {
+            value: "sanJose",
+            content: "San Jose",
+        }, ];
+        // functioon
+        let select = document.querySelector("select");
+        for (const key in dropDownList) {
+            const element = dropDownList[key];
+            console.log(element);
+            let option = document.createElement("option");
+            select.appendChild(option);
+            option.innerHTML = element.content;
+        }
+    </script>
+</body>
+
+</html>
