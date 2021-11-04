@@ -64,25 +64,16 @@ const todoApi = {
         if (
           !Number.isInteger(index) ||
           index < 0 ||
-          index >= this.todo.length
+          index >= this.todos.length
         ) {
-          reject({
-            error: "index is not valid !",
-          });
+          reject({ error: "index is not valid !" });
         }
 
-        if (!todo || todo.content) {
-          reject({
-            error: "content is empty !",
-          });
-        }
         this.todos = [
           ...this.todos.slice(0, index),
           ...this.todos.slice(index + 1),
         ];
-        resolve({
-          delTodo: "succeed",
-        });
+        resolve({ delTodo: "succeed" });
       }, 500);
     });
   },

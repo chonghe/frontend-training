@@ -18,9 +18,58 @@
     </body>
     <script src="todoApp.js"></script>
     <script>
-        //get list from api
+        // get item list
         let content = document.querySelector("#content");
-        let ul = document.createElement('ul');
+
+        function getList() {
+            todoApi.getAllTodos().then(data => {
+                data.todos.map(todo => {
+                    let div = document.createElement("div");
+                    let btn = document.createElement("button");
+                    content.appendChild(div);
+                    div.innerHTML = todo.content;
+                    todo.isCompleted ? div.style.color = "green" : div.style.color = "red";
+                    // li.innerHTML = item.content + " " + "(" + (item.isCompleted ? '✓' : 'X') + ")";
+                })
+            })
+        }
+
+        getList();
+        //add item list
+        let inputTodoField = document.querySelector("#inputTodoField");
+        let btn = document.querySelector("button");
+        btn.onclick = function() {
+            let todo = {
+                content: inputTodoField.value,
+                isCompleted: false,
+            };
+            todoApi.addTodo(todo).then((msg) => {
+                if ((msg = "succeed")) {
+                    //let uul = _that.content.childNodes.item(0);
+                    //console.log(uul);
+                    let div = document.createElement("div");
+                    content.appendChild(div);
+                    div.innerHTML = todo.content;
+                    todo.isCompleted ? (div.style.color = "green") : (div.style.color = "red");
+                }
+            });
+        };
+
+        //delete item from list
+        let div = document.querySelector("div");
+        //console.log(todoApi.todos.length);
+        //get a nodelist
+        //console.log(content.childNodes);
+
+
+        div.onclick = function() {
+            //console.log(content.length);
+        }
+
+        /*
+        get list from api
+        let content = document.querySelector("#content");
+        let ul = document.createElement("ul");
 
         content.appendChild(ul);
 
@@ -35,41 +84,40 @@
         // });
 
         function getList() {
-            todoApi.getAllTodos().then(data => {
-                data.todos.map(item => {
-                    let li = document.createElement("li");
-                    ul.appendChild(li);
-                    li.innerHTML = item.content;
-                    item.isCompleted ? li.style.color = "green" : li.style.color = "red";
-                    // li.innerHTML = item.content + " " + "(" + (item.isCompleted ? '✓' : 'X') + ")";
-                })
+        todoApi.getAllTodos().then((data) => {
+            data.todos.map((item) => {
+            let li = document.createElement("li");
+            ul.appendChild(li);
+            li.innerHTML = item.content;
+            item.isCompleted ? (li.style.color = "green") : (li.style.color = "red");
+            // li.innerHTML = item.content + " " + "(" + (item.isCompleted ? '✓' : 'X') + ")";
             });
-        };
-        getList()
+        });
+        }
+        getList();
 
         //add item on list by api
-        let inputTodoField = document.querySelector('#inputTodoField');
-        let btn = document.querySelector('button');
+        let inputTodoField = document.querySelector("#inputTodoField");
+        let btn = document.querySelector("button");
         let _that = this;
-        btn.onclick = function() {
-            let todo = {
-                content: inputTodoField.value,
-                isCompleted: false
+        btn.onclick = function () {
+        let todo = {
+            content: inputTodoField.value,
+            isCompleted: false,
+        };
+        todoApi.addTodo(todo).then((msg) => {
+            if ((msg = "succeed")) {
+            let uul = _that.content.childNodes.item(0);
+            //console.log(uul);
+            let li = document.createElement("li");
+            uul.appendChild(li);
+            li.innerHTML = todo.content;
+            todo.isCompleted ? (li.style.color = "green") : (li.style.color = "red");
             }
-            todoApi.addTodo(todo).then(msg => {
-                if (msg = 'succeed') {
-                    let uul = _that.content.childNodes.item(0);
-                    //console.log(uul);
-                    let li = document.createElement("li");
-                    uul.appendChild(li);
-                    li.innerHTML = todo.content;
-                    todo.isCompleted ? li.style.color = "green" : li.style.color = "red";
-                }
-            });
+        });
         };
 
         //modify item status
-
 
         //delete item on list
         let uul = content.childNodes.item(0);
@@ -78,15 +126,16 @@
         // Array.from(lis).forEach(it => {
         //     console.log(entry);
         // })
-        lis.map((item, index) => {
-            console.log(item[index]);
-            todoApi.delTodo(index).then(msg => {
-                if (msg = 'succeed') {
-                    //console.log(lis);
-                    console.log(todo.length);
-                }
-            })
-        })
+        // lis.map((item, index) => {
+        //     console.log(item[index]);
+        //     todoApi.delTodo(index).then(msg => {
+        //         if (msg = 'succeed') {
+        //             //console.log(lis);
+        //             console.log(todo.length);
+        //         }
+        //     })
+        // })
+        */
     </script>
 </body>
 
