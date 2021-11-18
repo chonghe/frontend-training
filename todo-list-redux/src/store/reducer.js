@@ -19,7 +19,7 @@ const reducer = (state = defaultState, action) => {
   }
   if (action.type === "delete_todo_item") {
     const newState = JSON.parse(JSON.stringify(state));
-    newState.list.spliced(action.index, 1);
+    newState.list.splice(action.index, 1);
     return newState;
   }
   return state;
