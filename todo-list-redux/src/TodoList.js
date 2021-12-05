@@ -9,6 +9,7 @@ export default class TodoList extends Component {
     super(props);
     this.state = store.getState();
     //console.log(store.getState());
+    //该组件订阅store，当store的数据发生变化，括号内的函数就会被自动执行
     store.subscribe(this.handleStoreChange);
   }
   render() {
@@ -47,13 +48,13 @@ export default class TodoList extends Component {
       type: "change_input_value",
       value: e.target.value,
     };
-    console.log(e.target.value);
+    //console.log(e.target.value);
     // 2-4 send this action to store
     store.dispatch(action);
     //console.log(e.target.value);
   };
   handleStoreChange = () => {
-    this.setState(store.getState());
+    this.setState(store.getState()); //store.getState()获取store内的更新数据
   };
   handleBtnClick = () => {
     const action = {
